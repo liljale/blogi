@@ -16,10 +16,15 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             pythonEnv
+            sqlite
           ];
           
           shellHook = ''
-            echo "entered python env"
+            # Create a sqlite database with our schema,
+            # if a database does not exist.
+            if [ ! -f "database.db" ]; then
+              sqlite3 database.db < schema.sql
+            fi
           '';
         };
         };

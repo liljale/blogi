@@ -1,1 +1,3 @@
-.direnv/
+/.direnv/
+/__pycache__/
+/database.db
