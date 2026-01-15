@@ -7,15 +7,10 @@
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
-      perSystem = { pkgs, ... }:
-        let
-          pythonEnv = pkgs.python3.withPackages (ps: with ps; [
-            flask
-          ]);
-        in {
+      perSystem = { pkgs, ... }: {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            pythonEnv
+            (python3.withPackages (ps: [ ps.flask ]))
             sqlite
           ];
           
