@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block title %}{% endblock %} - blogi</title>
+	</head>
+	<body>
+		<section class="content">
+			<div class="topnav">
+				<a href="{{ url_for('index') }}">latest</a>
+				<a href="{{ url_for('authors') }}">authors</a>
+				<a href="{{ url_for('tags') }}">tags</a>
+				<a href="{{ url_for('login') }}">login</a>
+				<a href="{{ url_for('register') }}">register</a>
+			</div>
+			<div class="body">
+				{% block content %}{% endblock %}
+			</div>
+		</section>
+	</body>
+</html>
