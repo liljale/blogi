@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask
+from flask import render_template, request, redirect
 from werkzeug.security import generate_password_hash
+
 import sqlite3
+
 from . import db
 
 app = Flask(__name__)
@@ -9,11 +12,11 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route("/authors")
+@app.route("/authors/")
 def authors():
     return render_template("authors.html")
 
-@app.route("/tags")
+@app.route("/tags/")
 def tags():
     return render_template("tags.html")
 
