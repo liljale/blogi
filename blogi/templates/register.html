@@ -1,7 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %} latest {% endblock %}
+{% block title %} register {% endblock %}
 
 {% block content %}
-<p>hei maailma! :3</p>
+<form action="/register" method="post">
+	<p>
+		username: <br>
+		<input type="text" name="username">
+	</p>
+	<p>
+		password: <br>
+		<input type="password" name="password1">
+	</p>
+	<p>
+		re-enter password: <br>
+		<input type="password" name="password2">
+	</p>
+	<input type="submit" value="register">
+</form>
 {% endblock %}
