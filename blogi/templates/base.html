@@ -4,8 +4,13 @@
 	<a href="{{ url_for('index') }}">latest</a>
 	<a href="{{ url_for('authors') }}">authors</a>
 	<a href="{{ url_for('tags') }}">tags</a>
+	{% if session.username %}
+	<a href="{{ url_for('login') }}">{{ session.username }}</a>
+	<a href="{{ url_for('logout') }}">logout</a>
+	{% else %}
 	<a href="{{ url_for('login') }}">login</a>
 	<a href="{{ url_for('register') }}">register</a>
+	{% endif %}
 </div>
 <div class="body">
 	{% block content %}{% endblock %}
