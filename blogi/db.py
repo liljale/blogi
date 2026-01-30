@@ -18,3 +18,10 @@ def query(query, args=(), one=False):
     result = con.execute(query, args).fetchall()
     con.close()
     return result
+
+def get_password_hash(user):
+    con = get_connection()
+    query = "SELECT password_hash FROM users WHERE username = ?"
+    result = con.execute(query, [user]).fetchone()
+    con.close
+    return result

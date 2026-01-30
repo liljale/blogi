@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import sqlite3
@@ -28,17 +28,23 @@ def login():
 
 @app.route("/login", methods=["POST"])
 def login_post():
-    username = request.form["username"]
-    password = request.form["password"]
+  error = None
+  username = request.form["username"]
+  password = request.form["password"]
 
-    query = "SELECT password_hash FROM users WHERE username = ?"
-    password_hash = db.query(query, [username])[0][0]
+  password_hash = db.get_password_hash(username)
 
-    if check_password_hash(password_hash, password):
-        session["username"] = username
-        return redirect("/")
+  if password_hash is None:
+    error = "invalid username or password"
+  else:
+    if check_password_hash(password_hash[0], password):
+      session["username"] = username
+      flash("login successful")
+      return redirect("/")
     else:
-        return "invalid username or password"
+      error = "invalid username or password"
+
+  return render_template("login.html", error=error)
 
 @app.route("/logout")
 def logout():
